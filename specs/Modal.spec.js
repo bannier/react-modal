@@ -265,14 +265,14 @@ export default () => {
 
   // eslint-disable-next-line max-len
   it("don't append class to document.body and html if modal is not open", () => {
-    renderModal({ isOpen: false });
+    renderModal({ isOpen: false, htmlOpenClassName: "testHtmlClass" });
     isBodyWithReactModalOpenClass().should.not.be.ok();
     isHtmlWithReactModalOpenClass().should.not.be.ok();
     unmountModal();
   });
 
   it("append class to document.body and html if modal is open", () => {
-    renderModal({ isOpen: true });
+    renderModal({ isOpen: true, htmlOpenClassName: "testHtmlClass" });
     isBodyWithReactModalOpenClass().should.be.ok();
     isHtmlWithReactModalOpenClass().should.be.ok();
     unmountModal();
@@ -280,15 +280,15 @@ export default () => {
 
   // eslint-disable-next-line max-len
   it("removes class from document.body and html when unmounted without closing", () => {
-    renderModal({ isOpen: true });
+    renderModal({ isOpen: true, htmlOpenClassName: "testHtmlClass" });
     unmountModal();
     isBodyWithReactModalOpenClass().should.not.be.ok();
     isHtmlWithReactModalOpenClass().should.not.be.ok();
   });
 
   it("remove class from document.body and html when no modals opened", () => {
-    renderModal({ isOpen: true });
-    renderModal({ isOpen: true });
+    renderModal({ isOpen: true, htmlOpenClassName: "testHtmlClass" });
+    renderModal({ isOpen: true, htmlOpenClassName: "testHtmlClass" });
     isBodyWithReactModalOpenClass().should.be.ok();
     isHtmlWithReactModalOpenClass().should.be.ok();
     unmountModal();
@@ -381,21 +381,21 @@ export default () => {
   });
 
   it("should not add classes to html for unopened modals", () => {
-    renderModal({ isOpen: true });
+    renderModal({ isOpen: true, htmlOpenClassName: "testHtmlClass" });
     isHtmlWithReactModalOpenClass().should.be.ok();
     renderModal({ isOpen: false, htmlOpenClassName: "testHtmlClass" });
     isHtmlWithReactModalOpenClass("testHtmlClass").should.not.be.ok();
   });
 
   it("should not remove classes from html if modal is closed", () => {
-    renderModal({ isOpen: true });
+    renderModal({ isOpen: true, htmlOpenClassName: "testHtmlClass" });
     isHtmlWithReactModalOpenClass().should.be.ok();
     renderModal({ isOpen: false, htmlOpenClassName: "testHtmlClass" });
-    renderModal({ isOpen: false });
+    renderModal({ isOpen: false, htmlOpenClassName: "testHtmlClass" });
     isHtmlWithReactModalOpenClass("testHtmlClass").should.not.be.ok();
     isHtmlWithReactModalOpenClass().should.be.ok();
-    renderModal({ isOpen: false });
-    renderModal({ isOpen: false });
+    renderModal({ isOpen: false, htmlOpenClassName: "testHtmlClass" });
+    renderModal({ isOpen: false, htmlOpenClassName: "testHtmlClass" });
     isHtmlWithReactModalOpenClass().should.be.ok();
   });
 

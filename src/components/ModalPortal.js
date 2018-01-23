@@ -132,7 +132,9 @@ export default class ModalPortal extends Component {
     } = this.props;
     // Add body and html class
     classList.add(document.body, bodyOpenClassName);
-    classList.add(document.getElementsByTagName("html")[0], htmlOpenClassName);
+    if (htmlOpenClassName) {
+      classList.add(document.getElementsByTagName("html")[0], htmlOpenClassName);
+    }
     // Add aria-hidden to appElement
     if (ariaHideApp) {
       ariaAppHider.hide(appElement);
@@ -144,10 +146,12 @@ export default class ModalPortal extends Component {
 
     // Remove body and html class
     classList.remove(document.body, this.props.bodyOpenClassName);
-    classList.remove(
-      document.getElementsByTagName("html")[0],
-      this.props.htmlOpenClassName
-    );
+    if (this.props.htmlOpenClassName) {
+      classList.remove(
+        document.getElementsByTagName("html")[0],
+        this.props.htmlOpenClassName
+      );
+    }
 
     // Reset aria-hidden attribute if all modals have been removed
     if (ariaHideApp && refCount.totalCount() < 1) {
